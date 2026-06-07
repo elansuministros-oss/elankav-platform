@@ -2,59 +2,79 @@ const unidades = [
   {
     nombre: 'ELANPET',
     etiqueta: 'Mascotas',
-    descripcion: 'Bienestar animal, muebles, accesorios y soluciones funcionales para mascotas.',
+    color: 'teal',
+    dominio: 'pet.elankav.com',
+    estado: 'Operativo',
+    descripcion:
+      'Mascotas, muebles funcionales, accesorios, veterinarias afiliadas, QR por veterinaria y comisiones.',
     enlace: 'https://pet.elankav.com',
   },
   {
     nombre: 'ELANVISUAL',
     etiqueta: 'Producción visual',
-    descripcion: 'Rotulación, impresión digital, UV, DTF UV, CNC, láser, acrílicos, PVC y fachadas.',
+    color: 'blue',
+    dominio: 'visual.elankav.com',
+    estado: 'Prioridad alta',
+    descripcion:
+      'Rotulación, impresión digital, fachadas, acrílicos, PVC, CNC, láser, displays, branding y señalización.',
     enlace: 'https://visual.elankav.com',
   },
   {
     nombre: 'ELANCENTER',
-    etiqueta: 'Tecnología',
-    descripcion: 'Centro digital, formación, soporte, servicios tecnológicos y operación comercial.',
+    etiqueta: 'Centro tecnológico',
+    color: 'purple',
+    dominio: 'center.elankav.com',
+    estado: 'Planificado',
+    descripcion:
+      'Tecnología, centro de cómputo, formación, servicios digitales, diseño, soporte y capacitación.',
     enlace: 'https://center.elankav.com',
   },
   {
     nombre: 'ELANSOLAR',
-    etiqueta: 'Energía',
-    descripcion: 'Soluciones solares, eficiencia energética, sistemas eléctricos y proyectos técnicos.',
+    etiqueta: 'Energía solar',
+    color: 'orange',
+    dominio: 'solar.elankav.com',
+    estado: 'Planificado',
+    descripcion:
+      'Sistemas fotovoltaicos, eficiencia energética, ingeniería, instalaciones y soluciones eléctricas.',
     enlace: 'https://solar.elankav.com',
   },
   {
     nombre: 'ELANAI',
-    etiqueta: 'Automatización',
-    descripcion: 'CRM, asistentes inteligentes, leads, WhatsApp, análisis y automatización empresarial.',
+    etiqueta: 'IA y automatización',
+    color: 'green',
+    dominio: 'ai.elankav.com',
+    estado: 'Planificado',
+    descripcion:
+      'Inteligencia artificial, automatización, asistentes, CRM, ERP, procesos inteligentes y análisis.',
     enlace: 'https://ai.elankav.com',
   },
 ]
 
 const capacidades = [
   {
-    titulo: 'Diseño',
-    texto: 'Identidad visual, branding, comunicación, interfaces y dirección gráfica para cada unidad.',
+    titulo: 'Producción visual',
+    texto: 'Rotulación, impresión, fachadas, acrílicos, PVC, CNC, láser, displays y comunicación visual.',
   },
   {
-    titulo: 'Producción',
-    texto: 'Fabricación física, rotulación, impresión, acrílicos, PVC, displays y estructuras comerciales.',
+    titulo: 'Tecnología operativa',
+    texto: 'Plataformas web, centros digitales, paneles administrativos y sistemas conectados por unidad.',
   },
   {
-    titulo: 'Tecnología',
-    texto: 'Plataformas web, centros digitales, soporte, administración y sistemas conectados.',
+    titulo: 'Automatización comercial',
+    texto: 'Leads, WhatsApp, seguimiento, cotizaciones, pedidos, producción, cobros y comisiones.',
   },
   {
-    titulo: 'Automatización',
-    texto: 'Flujos comerciales, CRM, leads, seguimiento, órdenes de trabajo y control operativo.',
+    titulo: 'Energía y eficiencia',
+    texto: 'Soluciones solares, sistemas eléctricos, proyectos técnicos y eficiencia energética empresarial.',
   },
   {
-    titulo: 'Energía',
-    texto: 'Soluciones solares, eficiencia eléctrica, proyectos energéticos y soporte técnico.',
+    titulo: 'CRM y ERP',
+    texto: 'Base maestra para clientes, materiales, inventario, compras, finanzas y control operativo.',
   },
   {
     titulo: 'Inteligencia Artificial',
-    texto: 'Asistentes, análisis, respuestas automatizadas, clasificación de clientes y sistemas inteligentes.',
+    texto: 'Asistentes, clasificación de mensajes, respuestas, análisis de datos y procesos inteligentes.',
   },
 ]
 
@@ -70,21 +90,30 @@ const flujoCRM = [
   'Comisión',
 ]
 
+const sistemas = [
+  { nombre: 'CRM Central', dominio: 'crm.elankav.com', estado: 'Creado' },
+  { nombre: 'ERP Central', dominio: 'erp.elankav.com', estado: 'Futuro' },
+  { nombre: 'WhatsApp Center', dominio: 'whatsapp.elankav.com', estado: 'Prioridad 4' },
+  { nombre: 'Leads Center', dominio: 'leads.elankav.com', estado: 'Futuro' },
+  { nombre: 'Admin Central', dominio: 'admin.elankav.com', estado: 'Futuro' },
+  { nombre: 'ELAN AI', dominio: 'ai.elankav.com', estado: 'Futuro' },
+]
+
 const proyectos = [
   {
-    nombre: 'COMEX',
-    tipo: 'Arquitectura comercial',
-    descripcion: 'Producción visual, fachada, rotulación, instalación y gestión técnica de proyecto.',
-  },
-  {
-    nombre: 'ORIFLAME',
-    tipo: 'Comunicación visual',
-    descripcion: 'Impresión, rotulación, ambientación interior y soporte visual para operación comercial.',
-  },
-  {
     nombre: 'ELANPET',
-    tipo: 'Plataforma digital',
-    descripcion: 'Catálogo, pedidos, veterinarias afiliadas, comisiones y operación con subdominio propio.',
+    tipo: 'Plataforma operativa',
+    descripcion: 'Pedidos, catálogo, veterinarias afiliadas, comisiones y subdominio propio en producción.',
+  },
+  {
+    nombre: 'CRM CENTRAL',
+    tipo: 'Sistema empresarial',
+    descripcion: 'Cadena comercial y operativa para empresas, contactos, leads, cotizaciones y producción.',
+  },
+  {
+    nombre: 'ELANVISUAL',
+    tipo: 'Unidad prioritaria',
+    descripcion: 'Siguiente unidad oficial para rotulación, impresión, fachadas, branding y producción visual.',
   },
 ]
 
@@ -94,10 +123,14 @@ function App() {
       <header className="elankav-header">
         <div className="elankav-nav">
           <a className="brand-lockup" href="#inicio" aria-label="Ir al inicio">
-            <div className="brand-mark">E</div>
+            <div className="brand-symbol" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
             <div className="brand-text">
               <strong>ELANKAV</strong>
-              <span>Matriz Corporativa</span>
+              <span>One Vision · Multiple Solutions</span>
             </div>
           </a>
 
@@ -105,7 +138,7 @@ function App() {
             <a href="#ecosistema">Ecosistema</a>
             <a href="#capacidades">Capacidades</a>
             <a href="#crm">CRM Central</a>
-            <a href="#proyectos">Proyectos</a>
+            <a href="#sistemas">Sistemas</a>
             <a href="#contacto">Contacto</a>
           </nav>
 
@@ -122,57 +155,94 @@ function App() {
             <h1>
               <span className="gradient-text">ELANKAV</span>
             </h1>
+            <div className="hero-slogan">ONE VISION · MULTIPLE SOLUTIONS</div>
             <p>
-              Matriz corporativa para conectar diseño, producción, tecnología,
-              energía, inteligencia artificial y operación comercial bajo una sola
-              plataforma empresarial.
+              Plataforma empresarial que integra diseño, producción, tecnología,
+              energía e inteligencia artificial bajo una sola visión operativa.
             </p>
+
             <div className="hero-actions">
               <a className="btn-primary" href="#ecosistema">
-                Ver ecosistema
+                Explorar ecosistema
               </a>
               <a className="btn-secondary" href="#crm">
                 Ver CRM Central
               </a>
             </div>
+
+            <div className="hero-metrics" aria-label="Indicadores principales ELANKAV">
+              <div>
+                <strong>5</strong>
+                <span>Unidades</span>
+              </div>
+              <div>
+                <strong>1</strong>
+                <span>CRM Central</span>
+              </div>
+              <div>
+                <strong>100%</strong>
+                <span>Cloud</span>
+              </div>
+              <div>
+                <strong>∞</strong>
+                <span>Escalable</span>
+              </div>
+            </div>
           </div>
 
           <div className="hero-panel" aria-label="Mapa visual del ecosistema ELANKAV">
-            <div className="orbit"></div>
+            <div className="orbit orbit-main"></div>
+            <div className="orbit orbit-inner"></div>
             <div className="core-card">
+              <div className="core-bars" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
               <strong>ELANKAV</strong>
               <span>Centro operativo</span>
             </div>
-            <div className="unit-chip chip-1">ELANPET</div>
-            <div className="unit-chip chip-2">ELANVISUAL</div>
-            <div className="unit-chip chip-3">ELANCENTER</div>
-            <div className="unit-chip chip-4">ELANSOLAR</div>
-            <div className="unit-chip chip-5">ELANAI</div>
+            <div className="unit-chip chip-1 unit-teal">ELANPET</div>
+            <div className="unit-chip chip-2 unit-blue">ELANVISUAL</div>
+            <div className="unit-chip chip-3 unit-purple">ELANCENTER</div>
+            <div className="unit-chip chip-4 unit-orange">ELANSOLAR</div>
+            <div className="unit-chip chip-5 unit-green">ELANAI</div>
           </div>
         </section>
 
         <section id="ecosistema" className="section">
           <div className="section-header">
             <span className="eyebrow">Unidades oficiales</span>
-            <h2>Un ecosistema. Múltiples líneas de negocio.</h2>
+            <h2>Una matriz. Cinco unidades. Un solo sistema.</h2>
             <p>
-              Cada unidad puede operar con identidad propia, pero todas deben
-              conectarse a la misma base corporativa, comercial y operativa.
+              Cada unidad opera con identidad propia, subdominio propio y enfoque
+              comercial específico, pero todas se conectan a la arquitectura central
+              de ELANKAV.
             </p>
           </div>
 
-          <div className="grid grid-3">
+          <div className="unit-grid">
             {unidades.map((unidad) => (
-              <article className="card ecosystem-card" key={unidad.nombre}>
-                <div>
-                  <div className="icon-box">{unidad.nombre.replace('ELAN', '') || 'E'}</div>
-                  <small>{unidad.etiqueta}</small>
-                  <h3>{unidad.nombre}</h3>
-                  <p>{unidad.descripcion}</p>
+              <article className={`unit-card accent-${unidad.color}`} key={unidad.nombre}>
+                <div className="unit-topline">
+                  <span>{unidad.etiqueta}</span>
+                  <small>{unidad.estado}</small>
                 </div>
-                <a className="contact-link" href={unidad.enlace} target="_blank" rel="noreferrer">
-                  Abrir unidad
-                </a>
+                <div className="unit-logo-row">
+                  <div className="mini-symbol" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <h3>{unidad.nombre}</h3>
+                </div>
+                <p>{unidad.descripcion}</p>
+                <div className="unit-footer">
+                  <span>{unidad.dominio}</span>
+                  <a href={unidad.enlace} target="_blank" rel="noreferrer">
+                    Abrir
+                  </a>
+                </div>
               </article>
             ))}
           </div>
@@ -181,16 +251,16 @@ function App() {
         <section id="capacidades" className="section">
           <div className="section-header">
             <span className="eyebrow">Capacidades</span>
-            <h2>La operación se diseña como sistema.</h2>
+            <h2>Tecnología, producción y operación conectadas.</h2>
             <p>
-              ELANKAV no funciona como negocios aislados. Funciona como una red
-              de capacidades conectadas por procesos, datos y producción real.
+              ELANKAV no se construye como negocios aislados. Se construye como
+              una red empresarial con procesos, datos, unidades y sistemas centrales.
             </p>
           </div>
 
           <div className="grid grid-3">
             {capacidades.map((capacidad, index) => (
-              <article className="card" key={capacidad.titulo}>
+              <article className="card capability-card" key={capacidad.titulo}>
                 <div className="icon-box">{String(index + 1).padStart(2, '0')}</div>
                 <h3>{capacidad.titulo}</h3>
                 <p>{capacidad.texto}</p>
@@ -201,19 +271,22 @@ function App() {
 
         <section id="crm" className="section">
           <div className="crm-box">
-            <div>
+            <div className="crm-copy">
               <span className="eyebrow">Sistema central</span>
               <h2>CRM CENTRAL ELANKAV</h2>
               <p>
-                La cadena operativa validada conecta empresas, contactos, leads,
-                cotizaciones, pedidos, producción, cobros y comisiones. Este será
-                el núcleo administrativo para las unidades del grupo.
+                La cadena operativa conecta clientes, oportunidades, cotizaciones,
+                pedidos, órdenes de trabajo, producción, cobros y comisiones. Es el
+                núcleo comercial que luego alimentará ERP, WhatsApp Center y ELAN AI.
               </p>
+              <a className="btn-secondary" href="https://crm.elankav.com" target="_blank" rel="noreferrer">
+                Preparado para crm.elankav.com
+              </a>
             </div>
 
-            <div className="flow-list">
+            <div className="crm-flow" aria-label="Cadena oficial CRM Central ELANKAV">
               {flujoCRM.map((item, index) => (
-                <div className="flow-item" key={item}>
+                <div className="flow-pill" key={item}>
                   <span>{String(index + 1).padStart(2, '0')}</span>
                   {item}
                 </div>
@@ -222,13 +295,34 @@ function App() {
           </div>
         </section>
 
+        <section id="sistemas" className="section digital-section">
+          <div className="section-header">
+            <span className="eyebrow">Ecosistema digital</span>
+            <h2>Sistemas centrales preparados para crecer.</h2>
+            <p>
+              La matriz ELANKAV.COM no es el CRM ni el ERP. Es la puerta de entrada.
+              Los sistemas centrales viven en subdominios preparados para escalar.
+            </p>
+          </div>
+
+          <div className="system-grid">
+            {sistemas.map((sistema) => (
+              <article className="system-card" key={sistema.nombre}>
+                <strong>{sistema.nombre}</strong>
+                <span>{sistema.dominio}</span>
+                <small>{sistema.estado}</small>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section id="proyectos" className="section">
           <div className="section-header">
             <span className="eyebrow">Proyectos</span>
-            <h2>Producción, plataforma y ejecución conectadas.</h2>
+            <h2>Construcción progresiva del ecosistema.</h2>
             <p>
-              La matriz corporativa debe mostrar capacidad real: proyectos físicos,
-              plataformas digitales y operación empresarial escalable.
+              La prioridad actual es consolidar la matriz corporativa, conectar ELANPET
+              al CRM Central y preparar ELANVISUAL como la siguiente unidad oficial.
             </p>
           </div>
 
@@ -243,32 +337,15 @@ function App() {
           </div>
         </section>
 
-        <section id="vision" className="section">
-          <div className="section-header">
+        <section className="section vision-section">
+          <div className="vision-box">
             <span className="eyebrow">Visión</span>
-            <h2>Una plataforma preparada para crecer sin improvisar.</h2>
+            <h2>Una visión. Múltiples soluciones.</h2>
             <p>
-              ELANKAV se proyecta como una estructura modular con CRM, ERP,
-              inventario, catálogo, cotizador, producción, WhatsApp, leads,
-              administración, inteligencia artificial y futuras integraciones 3D.
+              Construir un ecosistema empresarial capaz de integrar operaciones,
+              tecnología, producción e inteligencia artificial en una sola plataforma
+              escalable, administrable y preparada para múltiples líneas de negocio.
             </p>
-          </div>
-
-          <div className="grid grid-2">
-            <article className="card">
-              <h3>Escalabilidad</h3>
-              <p>
-                Preparada para nuevas unidades, nuevos productos, subdominios,
-                permisos, roles, proveedores, materiales y procesos internos.
-              </p>
-            </article>
-            <article className="card">
-              <h3>Administración visual</h3>
-              <p>
-                La meta es administrar contenido, productos, clientes, órdenes y
-                datos desde interfaz, sin modificar código manualmente.
-              </p>
-            </article>
           </div>
         </section>
 
@@ -276,23 +353,21 @@ function App() {
           <div className="contact-box">
             <div>
               <span className="eyebrow">Contacto</span>
-              <h2>Hablemos de tu próximo proyecto.</h2>
+              <h2>Conversemos sobre el siguiente proyecto.</h2>
               <p>
-                Diseño, producción, tecnología y automatización integrados para
-                convertir ideas en sistemas operativos y proyectos reales.
+                ELANKAV.COM es la matriz corporativa. Desde aquí se conecta la visión,
+                las unidades, los sistemas y los próximos proyectos del ecosistema.
               </p>
             </div>
 
             <div className="contact-actions">
-              <a className="contact-link" href="https://wa.me/50585228183" target="_blank" rel="noreferrer">
-                WhatsApp principal
+              <a className="contact-link" href="mailto:elansuministros@gmail.com">
+                elansuministros@gmail.com
               </a>
-              <a className="contact-link" href="https://pet.elankav.com" target="_blank" rel="noreferrer">
-                Abrir ELANPET
-              </a>
-              <a className="contact-link" href="https://elankav.com">
+              <a className="contact-link" href="https://elankav.com" target="_blank" rel="noreferrer">
                 elankav.com
               </a>
+              <span className="contact-note">Managua, Nicaragua · Infraestructura Cloud</span>
             </div>
           </div>
         </section>
@@ -300,8 +375,17 @@ function App() {
 
       <footer className="footer">
         <div className="footer-inner">
-          <span>© ELANKAV. Matriz corporativa.</span>
-          <span>Diseño · Producción · Tecnología · Energía · IA</span>
+          <div>
+            <strong>ELANKAV</strong>
+            <span>One Vision · Multiple Solutions</span>
+          </div>
+          <div className="footer-links">
+            <a href="https://pet.elankav.com" target="_blank" rel="noreferrer">ELANPET</a>
+            <a href="https://visual.elankav.com" target="_blank" rel="noreferrer">ELANVISUAL</a>
+            <a href="https://center.elankav.com" target="_blank" rel="noreferrer">ELANCENTER</a>
+            <a href="https://solar.elankav.com" target="_blank" rel="noreferrer">ELANSOLAR</a>
+            <a href="https://ai.elankav.com" target="_blank" rel="noreferrer">ELANAI</a>
+          </div>
         </div>
       </footer>
     </div>
