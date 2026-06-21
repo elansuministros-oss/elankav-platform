@@ -204,21 +204,7 @@ export default function App() {
               <button onClick={cerrarAdmin}>Cerrar sesión</button>
             </div>
 
-            <div className="executive-grid">
-  <div><span>Ventas hoy</span><strong>C$ 0.00</strong><small>Futuro: datos reales</small></div>
-  <div><span>Cotizaciones</span><strong>0</strong><small>ELANVISUAL / ELANPET</small></div>
-  <div><span>Pedidos activos</span><strong>0</strong><small>En proceso</small></div>
-  <div><span>Producción</span><strong>0</strong><small>Órdenes abiertas</small></div>
-  <div><span>Cobros pendientes</span><strong>C$ 0.00</strong><small>Cuentas por cobrar</small></div>
-  <div><span>Leads</span><strong>0</strong><small>Sin atender / nuevos</small></div>
-</div>
-
-<div className="portal-alerts">
-  <h3>Alertas operativas</h3>
-  <p>Sin alertas críticas registradas. Pendiente conectar datos reales desde CORE y Supabase.</p>
-</div>
-
-<div className="master-modules-grid">
+            <div className="master-modules-grid">
               {modulosMaestros.map(([nombre, url]) => (
                 <button key={nombre} onClick={() => abrir(url)}>
                   <span>{nombre}</span>
@@ -310,4 +296,3 @@ export default function App() {
     </main>
   )
 }
-
