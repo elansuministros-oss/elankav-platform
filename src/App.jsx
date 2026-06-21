@@ -1,74 +1,73 @@
+﻿import { useEffect, useState } from "react"
+import "./App.css"
+
+const ADMIN_KEY = "elankav_admin_session_v1"
+
 const unidades = [
   {
-    nombre: 'ELANPET',
-    clase: 'teal',
-    estado: 'Operativo',
-    dominio: 'pet.elankav.com',
-    descripcion: 'Mascotas, productos, accesorios, veterinarias afiliadas, pedidos por QR y comisiones.',
-    enlace: 'https://pet.elankav.com',
-    accion: 'Entrar',
+    nombre: "ELANPET",
+    clase: "teal",
+    estado: "Operativo",
+    dominio: "pet.elankav.com",
+    descripcion: "Mascotas, productos, accesorios, veterinarias afiliadas, pedidos por QR y comisiones.",
+    enlace: "https://pet.elankav.com",
+    admin: "https://pet.elankav.com/admin",
+    crm: "https://pet.elankav.com/admin/resultados",
+    produccion: "https://pet.elankav.com/produccion",
   },
   {
-    nombre: 'ELANVISUAL',
-    clase: 'blue',
-    estado: 'Próxima unidad',
-    dominio: 'visual.elankav.com',
-    descripcion: 'Rotulación, impresión digital, fachadas, acrílicos, PVC, CNC, láser, displays y branding.',
-    enlace: 'https://visual.elankav.com',
-    accion: 'Próximamente',
+    nombre: "ELANVISUAL",
+    clase: "blue",
+    estado: "Operativo",
+    dominio: "visual.elankav.com",
+    descripcion: "Rotulación, impresión digital, fachadas, acrílicos, PVC, CNC, láser, displays y branding.",
+    enlace: "https://visual.elankav.com",
+    admin: "https://visual.elankav.com/admin",
+    crm: "https://visual.elankav.com/admin/resultados",
+    produccion: "https://visual.elankav.com/produccion",
   },
   {
-    nombre: 'ELANCENTER',
-    clase: 'purple',
-    estado: 'Planificado',
-    dominio: 'center.elankav.com',
-    descripcion: 'Tecnología, formación, centro digital, servicios informáticos, diseño y capacitación.',
-    enlace: 'https://center.elankav.com',
-    accion: 'Planificado',
+    nombre: "ELANCENTER",
+    clase: "purple",
+    estado: "Planificado",
+    dominio: "center.elankav.com",
+    descripcion: "Tecnología, formación, centro digital, servicios informáticos, diseño y capacitación.",
+    enlace: "https://center.elankav.com",
+    admin: "#",
+    crm: "#",
+    produccion: "#",
   },
   {
-    nombre: 'ELANSOLAR',
-    clase: 'orange',
-    estado: 'Planificado',
-    dominio: 'solar.elankav.com',
-    descripcion: 'Energía solar, sistemas fotovoltaicos, eficiencia energética y soluciones eléctricas.',
-    enlace: 'https://solar.elankav.com',
-    accion: 'Planificado',
+    nombre: "ELANHOME",
+    clase: "orange",
+    estado: "Planificado",
+    dominio: "home.elankav.com",
+    descripcion: "Soluciones para hogar, mobiliario, decoración, interiores y productos constructivos.",
+    enlace: "https://home.elankav.com",
+    admin: "#",
+    crm: "#",
+    produccion: "#",
   },
   {
-    nombre: 'ELANAI',
-    clase: 'green',
-    estado: 'Planificado',
-    dominio: 'ai.elankav.com',
-    descripcion: 'Inteligencia artificial, automatización, asistentes, procesos inteligentes y análisis operativo.',
-    enlace: 'https://ai.elankav.com',
-    accion: 'Planificado',
+    nombre: "KAVTORÉ",
+    clase: "green",
+    estado: "En desarrollo",
+    dominio: "ai.elankav.com",
+    descripcion: "Inteligencia artificial, automatización, asistentes, procesos inteligentes y análisis operativo.",
+    enlace: "https://ai.elankav.com",
+    admin: "https://elankav-core.vercel.app",
+    crm: "https://elankav-core.vercel.app",
+    produccion: "https://elankav-core.vercel.app",
   },
 ]
 
-const proyectos = [
-  ['Fachadas comerciales', 'Rotulación corporativa, letras 3D, iluminación y revestimientos.'],
-  ['Impresión y branding', 'Material publicitario, displays, vinil, lonas y comunicación visual.'],
-  ['Tecnología aplicada', 'Plataformas, automatización, datos, procesos y operación digital.'],
-  ['Energía y soluciones', 'Sistemas solares, eficiencia energética y proyectos especiales.'],
-]
-
-const capacidades = [
-  'Diseño y estrategia visual',
-  'Fabricación y producción',
-  'Tecnología y plataformas',
-  'Automatización operativa',
-  'Energía y sostenibilidad',
-  'Escalabilidad empresarial',
-]
-
-const sistemasInternos = [
-  'Gestión comercial centralizada',
-  'Control de pedidos y producción',
-  'Inventario y materiales',
-  'Cobros, cuentas y comisiones',
-  'Leads y canales digitales',
-  'Administración global',
+const modulosMaestros = [
+  ["ELANKAV CORE", "https://elankav-core.vercel.app"],
+  ["CRM CENTRAL", "https://elankav-core.vercel.app"],
+  ["Finanzas", "https://elankav-core.vercel.app"],
+  ["Inventario", "https://elankav-core.vercel.app"],
+  ["Producción Global", "https://elankav-core.vercel.app"],
+  ["KAVTORÉ", "https://elankav-core.vercel.app"],
 ]
 
 function BrandSymbol() {
@@ -81,7 +80,37 @@ function BrandSymbol() {
   )
 }
 
+function abrir(url) {
+  if (!url || url === "#") return
+  window.open(url, "_blank", "noopener,noreferrer")
+}
+
 export default function App() {
+  const [adminActivo, setAdminActivo] = useState(false)
+  const [clave, setClave] = useState("")
+
+  useEffect(() => {
+    setAdminActivo(localStorage.getItem(ADMIN_KEY) === "activo")
+  }, [])
+
+  const loginAdmin = (event) => {
+    event.preventDefault()
+
+    if (clave.trim() !== "ELANKAV-ROOT") {
+      alert("Clave administrativa incorrecta")
+      return
+    }
+
+    localStorage.setItem(ADMIN_KEY, "activo")
+    setAdminActivo(true)
+    setClave("")
+  }
+
+  const cerrarAdmin = () => {
+    localStorage.removeItem(ADMIN_KEY)
+    setAdminActivo(false)
+  }
+
   return (
     <main className="elankav-page">
       <header className="site-header">
@@ -98,11 +127,12 @@ export default function App() {
             <a href="#ecosistema">Ecosistema</a>
             <a href="#unidades">Unidades</a>
             <a href="#capacidades">Capacidades</a>
-            <a href="#proyectos">Proyectos</a>
             <a href="#contacto">Contacto</a>
           </div>
 
-          <a className="nav-cta" href="#contacto">Iniciar proyecto</a>
+          <a className="nav-cta" href="#portal">
+            {adminActivo ? "Portal Maestro" : "Acceso admin"}
+          </a>
         </nav>
       </header>
 
@@ -117,7 +147,7 @@ export default function App() {
           </p>
 
           <div className="hero-actions">
-            <a className="btn-primary" href="#ecosistema">Explorar ecosistema</a>
+            <a className="btn-primary" href="#portal">Entrar al ecosistema</a>
             <a className="btn-secondary" href="#unidades">Conocer unidades</a>
           </div>
 
@@ -143,12 +173,56 @@ export default function App() {
         </div>
       </section>
 
+      <section className="section" id="portal">
+        {!adminActivo ? (
+          <div className="admin-login-card">
+            <span className="eyebrow">Acceso administrativo</span>
+            <h2>Portal Maestro ELANKAV</h2>
+            <p>
+              Ingresá como administrador para acceder al CORE, CRM CENTRAL,
+              unidades operativas, producción, finanzas e inventario.
+            </p>
+
+            <form onSubmit={loginAdmin} className="admin-login-form">
+              <input
+                type="password"
+                value={clave}
+                onChange={(event) => setClave(event.target.value)}
+                placeholder="Clave administrativa"
+              />
+              <button type="submit">Entrar como administrador</button>
+            </form>
+          </div>
+        ) : (
+          <div className="master-portal">
+            <div className="portal-header">
+              <div>
+                <span className="eyebrow">Administrador activo</span>
+                <h2>Portal Maestro ELANKAV</h2>
+                <p>Acceso unificado inicial al ecosistema completo.</p>
+              </div>
+              <button onClick={cerrarAdmin}>Cerrar sesión</button>
+            </div>
+
+            <div className="master-modules-grid">
+              {modulosMaestros.map(([nombre, url]) => (
+                <button key={nombre} onClick={() => abrir(url)}>
+                  <span>{nombre}</span>
+                  <small>Abrir módulo</small>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </section>
+
       <section className="section" id="ecosistema">
         <div className="section-header compact">
           <span className="eyebrow">Arquitectura oficial</span>
           <h2>Unidades de negocio conectadas bajo ELANKAV.</h2>
           <p>
-            Cada unidad tiene su dominio, color, función y etapa de desarrollo. La matriz funciona como portal corporativo y punto de entrada.
+            Cada unidad tiene su dominio, color, función y etapa de desarrollo.
+            La matriz funciona como portal corporativo y punto de entrada.
           </p>
         </div>
 
@@ -162,15 +236,24 @@ export default function App() {
               <h3>{unidad.nombre}</h3>
               <small>{unidad.dominio}</small>
               <p>{unidad.descripcion}</p>
-              <a
-                className="unit-link"
-                href={unidad.enlace}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`${unidad.accion} a ${unidad.nombre}`}
-              >
-                {unidad.accion}
-              </a>
+
+              {!adminActivo ? (
+                <a
+                  className="unit-link"
+                  href={unidad.enlace}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Entrar
+                </a>
+              ) : (
+                <div className="admin-unit-actions">
+                  <button onClick={() => abrir(unidad.enlace)}>Plataforma</button>
+                  <button onClick={() => abrir(unidad.admin)}>Admin</button>
+                  <button onClick={() => abrir(unidad.crm)}>CRM</button>
+                  <button onClick={() => abrir(unidad.produccion)}>Producción</button>
+                </div>
+              )}
             </article>
           ))}
         </div>
@@ -180,60 +263,6 @@ export default function App() {
         <div className="section-header">
           <span className="eyebrow">Capacidades</span>
           <h2>Producción, tecnología y operación en una misma estructura.</h2>
-        </div>
-
-        <div className="capability-grid">
-          {capacidades.map((capacidad, index) => (
-            <div className="capability-card" key={capacidad}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{capacidad}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section internal-section">
-        <div className="internal-box">
-          <div>
-            <span className="eyebrow">Infraestructura empresarial</span>
-            <h2>Sistemas internos preparados para escalar.</h2>
-            <p>
-              ELANKAV opera con una estructura centralizada para administrar clientes, pedidos,
-              producción, cobros, inventario, leads y unidades de negocio desde una base común.
-            </p>
-          </div>
-          <div className="internal-list">
-            {sistemasInternos.map((sistema) => (
-              <span key={sistema}>{sistema}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section" id="proyectos">
-        <div className="section-header">
-          <span className="eyebrow">Proyectos y soluciones</span>
-          <h2>Aplicaciones reales para marcas, negocios y operaciones.</h2>
-        </div>
-
-        <div className="projects-grid">
-          {proyectos.map(([nombre, descripcion]) => (
-            <article className="project-card" key={nombre}>
-              <h3>{nombre}</h3>
-              <p>{descripcion}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section vision-section">
-        <div className="vision-card">
-          <span className="eyebrow">Visión</span>
-          <h2>Una visión. Múltiples soluciones.</h2>
-          <p>
-            ELANKAV nace para integrar servicios, producción, tecnología y sistemas inteligentes
-            en una plataforma empresarial capaz de crecer por unidades, sin duplicar estructuras ni perder control operativo.
-          </p>
         </div>
       </section>
 
