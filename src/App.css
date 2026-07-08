@@ -331,3 +331,53 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* PLATFORM CARDS */
+
+.platform-card {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .platform-card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .platform-card {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.platform-logo {
+  position: relative;
+}
+
+.platform-logo-mono {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.platform-logo-color {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.platform-card:hover .platform-logo-mono,
+.platform-card:focus-visible .platform-logo-mono,
+.platform-card:active .platform-logo-mono {
+  opacity: 0;
+}
+
+.platform-card:hover .platform-logo-color,
+.platform-card:focus-visible .platform-logo-color,
+.platform-card:active .platform-logo-color {
+  opacity: 1;
+}
+
+.platform-domain {
+  /* Add any specific styles for platform-domain if needed */
+}
