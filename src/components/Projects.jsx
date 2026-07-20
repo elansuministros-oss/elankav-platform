@@ -1,4 +1,5 @@
 import { ecosystemPlatforms } from "../data/ecosystemPlatforms"
+import "./Ecosystem.css"
 
 export default function Projects() {
   const featuredPlatforms = ecosystemPlatforms.filter(
@@ -18,12 +19,12 @@ export default function Projects() {
       </div>
 
       <div className="projects-grid">
-        {featuredPlatforms.map((platform) => {
+        {featuredPlatforms.map((platform, index) => {
           const content = (
             <>
               <div className="platform-card-topline">
                 <span className="platform-index">
-                  {String(featuredPlatforms.indexOf(platform) + 1).padStart(2, "0")}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="platform-status">
                   {platform.status === "active" ? "UNIDAD ACTIVA" : "ECOSISTEMA"}
