@@ -1,20 +1,21 @@
-const units = [
-  {
-    name: "ELANVISUAL",
-    href: "https://visual.elankav.com/",
-    label: "Abrir ELANVISUAL",
-  },
-  { name: "ELANCENTER" },
-  {
-    name: "ELANPET",
-    href: "https://pet.elankav.com/",
-    label: "Abrir ELANPET",
-  },
-  { name: "ELANHOME" },
-  { name: "KAVTORÉ" },
-]
+import { useEffect, useState } from "react"
+import { platformDirectoryService } from "../services/platformDirectoryService"
 
 export default function Units() {
+  const [units, setUnits] = useState([])
+
+  useEffect(() => {
+    let active = true
+
+    platformDirectoryService.getPublicPlatforms().then((platforms) => {
+      if (active) setUnits(platforms)
+    })
+
+    return () => {
+      active = false
+    }
+  }, [])
+
   return (
     <section className="units" id="unidades">
       <span>NUESTRAS UNIDADES</span>
@@ -26,15 +27,30 @@ export default function Units() {
       </h2>
 
       <div className="units-list">
-        {units.map((unit) =>
-          unit.href ? (
-            <a key={unit.name} href={unit.href} aria-label={unit.label}>
-              <div>{unit.name}</div>
-            </a>
-          ) : (
-            <div key={unit.name}>{unit.name}</div>
-          ),
-        )}
+        {units.map((unit) => (
+          <article className="unit-entry" key={unit.id || unit.slug}>
+            <div className="unit-identity">
+              <div className="unit-logo-frame">
+                {unit.logoUrl ? (
+                  <img src={unit.logoUrl} alt={`Logo ${unit.name}`} loading="lazy" />
+                ) : (
+                  <strong>{unit.name}</strong>
+                )}
+              </div>
+
+              <div className="unit-copy">
+                <h3>{unit.name}</h3>
+                <p>{unit.description}</p>
+              </div>
+            </div>
+
+            {unit.routeUrl && (
+              <a href={unit.routeUrl} aria-label={`Explorar ${unit.name}`}>
+                Explorar plataforma →
+              </a>
+            )}
+          </article>
+        ))}
       </div>
     </section>
   )
