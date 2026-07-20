@@ -121,24 +121,32 @@ export default function AdminApp() {
   const [loading, setLoading] = useState(Boolean(accessToken))
   const [message, setMessage] = useState("")
 
-  const loadPlatforms = async (token = accessToken) => {
-    if (!token) return
-    setLoading(true)
-    setMessage("")
-    try {
-      setPlatforms(await platformDirectoryService.getAdminPlatforms(token))
-    } catch (error) {
-      sessionStorage.removeItem(SESSION_KEY)
-      setAccessToken("")
-      setMessage(error.message || "La sesión no es válida o no tiene permisos administrativos.")
-    } finally {
-      setLoading(false)
-    }
-  }
-
   useEffect(() => {
-    if (accessToken) loadPlatforms(accessToken)
-  }, [])
+    let active = true
+
+    async function restoreSession() {
+      if (!accessToken) return
+      setLoading(true)
+      setMessage("")
+      try {
+        const loaded = await platformDirectoryService.getAdminPlatforms(accessToken)
+        if (active) setPlatforms(loaded)
+      } catch (error) {
+        sessionStorage.removeItem(SESSION_KEY)
+        if (active) {
+          setAccessToken("")
+          setMessage(error.message || "La sesión no es válida o no tiene permisos administrativos.")
+        }
+      } finally {
+        if (active) setLoading(false)
+      }
+    }
+
+    restoreSession()
+    return () => {
+      active = false
+    }
+  }, [accessToken])
 
   const signIn = async (event) => {
     event.preventDefault()
@@ -149,7 +157,6 @@ export default function AdminApp() {
       sessionStorage.setItem(SESSION_KEY, token)
       setAccessToken(token)
       setPassword("")
-      await loadPlatforms(token)
     } catch (error) {
       setMessage(error.message || "No fue posible iniciar sesión.")
       setLoading(false)
