@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { platformDirectoryService } from "../services/platformDirectoryService"
+import "./Units.css"
 
 export default function Units() {
   const [units, setUnits] = useState([])
