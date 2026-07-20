@@ -1,7 +1,22 @@
+const units = [
+  {
+    name: "ELANVISUAL",
+    href: "https://visual.elankav.com/",
+    label: "Abrir ELANVISUAL",
+  },
+  { name: "ELANCENTER" },
+  {
+    name: "ELANPET",
+    href: "https://pet.elankav.com/",
+    label: "Abrir ELANPET",
+  },
+  { name: "ELANHOME" },
+  { name: "KAVTORÉ" },
+]
+
 export default function Units() {
   return (
-    <section className="units">
-
+    <section className="units" id="unidades">
       <span>NUESTRAS UNIDADES</span>
 
       <h2>
@@ -11,15 +26,16 @@ export default function Units() {
       </h2>
 
       <div className="units-list">
-
-        <div>ELANVISUAL</div>
-        <div>ELANCENTER</div>
-        <div>ELANPET</div>
-        <div>ELANHOME</div>
-        <div>KAVTORÉ</div>
-
+        {units.map((unit) =>
+          unit.href ? (
+            <a key={unit.name} href={unit.href} aria-label={unit.label}>
+              <div>{unit.name}</div>
+            </a>
+          ) : (
+            <div key={unit.name}>{unit.name}</div>
+          ),
+        )}
       </div>
-
     </section>
   )
 }
