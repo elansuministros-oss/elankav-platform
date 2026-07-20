@@ -31,7 +31,6 @@ function PlatformEditor({ platform, accessToken, onSaved, onDeleted }) {
   const upload = async (event) => {
     const file = event.target.files?.[0]
     if (!file) return
-
     setUploading(true)
     setMessage("")
     try {
@@ -54,6 +53,7 @@ function PlatformEditor({ platform, accessToken, onSaved, onDeleted }) {
       onDeleted(draft.id)
     } catch (error) {
       setMessage(error.message || "No fue posible eliminar la plataforma.")
+    } finally {
       setSaving(false)
     }
   }
@@ -63,48 +63,20 @@ function PlatformEditor({ platform, accessToken, onSaved, onDeleted }) {
       <div className="admin-platform-preview">
         {draft.logoUrl ? <img src={draft.logoUrl} alt={`Logo ${draft.name}`} /> : <strong>{draft.name || "NUEVA"}</strong>}
       </div>
-
       <div className="admin-field-grid">
-        <label>
-          Nombre
-          <input value={draft.name} onChange={(event) => update("name", event.target.value)} />
-        </label>
-        <label>
-          Identificador
-          <input value={draft.slug} onChange={(event) => update("slug", event.target.value)} placeholder="elanvisual" />
-        </label>
-        <label className="admin-field-wide">
-          Descripción
-          <textarea rows="4" value={draft.description} onChange={(event) => update("description", event.target.value)} />
-        </label>
-        <label className="admin-field-wide">
-          Ruta pública
-          <input type="url" value={draft.routeUrl} onChange={(event) => update("routeUrl", event.target.value)} placeholder="https://visual.elankav.com/" />
-        </label>
-        <label className="admin-field-wide">
-          URL del logo
-          <input type="url" value={draft.logoUrl} onChange={(event) => update("logoUrl", event.target.value)} placeholder="https://..." />
-        </label>
-        <label>
-          Orden
-          <input type="number" value={draft.sortOrder} onChange={(event) => update("sortOrder", Number(event.target.value))} />
-        </label>
-        <label className="admin-checkbox">
-          <input type="checkbox" checked={draft.active} onChange={(event) => update("active", event.target.checked)} />
-          Visible en el portal
-        </label>
+        <label>Nombre<input value={draft.name} onChange={(event) => update("name", event.target.value)} /></label>
+        <label>Identificador<input value={draft.slug} onChange={(event) => update("slug", event.target.value)} placeholder="elanvisual" /></label>
+        <label className="admin-field-wide">Descripción<textarea rows="4" value={draft.description} onChange={(event) => update("description", event.target.value)} /></label>
+        <label className="admin-field-wide">Ruta pública<input type="url" value={draft.routeUrl} onChange={(event) => update("routeUrl", event.target.value)} placeholder="https://visual.elankav.com/" /></label>
+        <label className="admin-field-wide">URL del logo<input type="url" value={draft.logoUrl} onChange={(event) => update("logoUrl", event.target.value)} placeholder="https://..." /></label>
+        <label>Orden<input type="number" value={draft.sortOrder} onChange={(event) => update("sortOrder", Number(event.target.value))} /></label>
+        <label className="admin-checkbox"><input type="checkbox" checked={draft.active} onChange={(event) => update("active", event.target.checked)} />Visible en el portal</label>
       </div>
-
       <div className="admin-upload-row">
-        <label className="admin-upload-button">
-          {uploading ? "Cargando logo..." : "Subir logo"}
-          <input type="file" accept="image/*" onChange={upload} disabled={uploading} />
-        </label>
+        <label className="admin-upload-button">{uploading ? "Cargando logo..." : "Subir logo"}<input type="file" accept="image/*" onChange={upload} disabled={uploading} /></label>
         <span>PNG, JPG, WebP o SVG. Máximo 3 MB.</span>
       </div>
-
       {message && <p className="admin-message">{message}</p>}
-
       <div className="admin-card-actions">
         <button className="admin-save" onClick={save} disabled={saving}>{saving ? "Guardando..." : "Guardar"}</button>
         {draft.id && <button className="admin-delete" onClick={remove} disabled={saving}>Eliminar</button>}
@@ -123,7 +95,6 @@ export default function AdminApp() {
 
   useEffect(() => {
     let active = true
-
     async function restoreSession() {
       if (!accessToken) return
       setLoading(true)
@@ -141,11 +112,8 @@ export default function AdminApp() {
         if (active) setLoading(false)
       }
     }
-
     restoreSession()
-    return () => {
-      active = false
-    }
+    return () => { active = false }
   }, [accessToken])
 
   const signIn = async (event) => {
@@ -202,23 +170,14 @@ export default function AdminApp() {
         <div><span>ELANKAV MASTER</span><h1>Directorio de plataformas</h1></div>
         <div className="admin-header-actions"><a href="/" target="_blank" rel="noreferrer">Ver portal</a><button onClick={signOut}>Cerrar sesión</button></div>
       </header>
-
       <section className="admin-content">
         <div className="admin-intro">
           <div><h2>Unidades del ecosistema</h2><p>Los cambios guardados alimentan directamente la sección pública “Nuestras unidades”.</p></div>
           <button onClick={() => setPlatforms((current) => [...current, platformDirectoryService.createEmptyPlatform()])}>+ Agregar plataforma</button>
         </div>
-
         {loading ? <p className="admin-status">Cargando plataformas...</p> : platforms.map((platform, index) => (
-          <PlatformEditor
-            key={platform.id || `new-${index}`}
-            platform={platform}
-            accessToken={accessToken}
-            onSaved={handleSaved}
-            onDeleted={(id) => setPlatforms((current) => current.filter((item) => item.id !== id))}
-          />
+          <PlatformEditor key={platform.id || `new-${index}`} platform={platform} accessToken={accessToken} onSaved={handleSaved} onDeleted={(id) => setPlatforms((current) => current.filter((item) => item.id !== id))} />
         ))}
-
         {message && <p className="admin-message">{message}</p>}
       </section>
     </main>
