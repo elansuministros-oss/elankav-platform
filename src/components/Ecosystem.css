@@ -1,0 +1,107 @@
+.projects-grid .platform-card {
+  min-height: 390px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #111;
+  color: #fff;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.projects-grid .platform-card-link:hover,
+.projects-grid .platform-card-link:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.34);
+  background: #080808;
+}
+
+.platform-card-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.platform-card-content {
+  margin-top: auto;
+}
+
+.projects-grid .platform-card h3 {
+  margin-bottom: 18px;
+}
+
+.projects-grid .platform-card p {
+  max-width: 420px;
+  color: #c9c9c9;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.projects-grid .platform-domain {
+  display: inline-block;
+  margin-top: 28px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.units-list a,
+.units-list > div {
+  padding: 34px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid #ddd;
+  color: #080808;
+}
+
+.units-list a {
+  transition:
+    padding-left 180ms ease,
+    opacity 180ms ease;
+}
+
+.units-list a:hover,
+.units-list a:focus-visible {
+  padding-left: 12px;
+}
+
+.units-list strong {
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.units-list a > span,
+.units-list > div > span {
+  flex: 0 0 auto;
+  color: #777;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+@media (max-width: 680px) {
+  .projects-grid .platform-card {
+    min-height: 330px;
+  }
+
+  .units-list a,
+  .units-list > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
