@@ -1,9 +1,9 @@
 export default function Header() {
   return (
     <header className="header">
-      <button className="menu-btn">
-        ☰ MENÚ
-      </button>
+      <a className="menu-btn" href="#unidades">
+        ☰ UNIDADES
+      </a>
 
       <div className="logo">
         ELANKAV.
