@@ -1,73 +1,53 @@
+import { ecosystemPlatforms } from "../data/ecosystemPlatforms"
+import "./Ecosystem.css"
+
 export default function Projects() {
-  const platforms = [
-    {
-      name: "ELANVISUAL",
-      description: "Description for ELANVISUAL",
-      domain: "visual.elan.com",
-      href: "https://visual.elan.com",
-      logoMono: "Placeholder for logoMono",
-      logoColor: "Placeholder for logoColor"
-    },
-    {
-      name: "ELANCENTER",
-      description: "Description for ELANCENTER",
-      domain: "center.elan.com",
-      href: "https://center.elan.com",
-      logoMono: "Placeholder for logoMono",
-      logoColor: "Placeholder for logoColor"
-    },
-    {
-      name: "ELANPET",
-      description: "Description for ELANPET",
-      domain: "pet.elan.com",
-      href: "https://pet.elan.com",
-      logoMono: "Placeholder for logoMono",
-      logoColor: "Placeholder for logoColor"
-    },
-    {
-      name: "ELAN AI",
-      description: "Description for ELAN AI",
-      domain: "ai.elan.com",
-      href: "https://ai.elan.com",
-      logoMono: "Placeholder for logoMono",
-      logoColor: "Placeholder for logoColor"
-    },
-    {
-      name: "ELANHOME",
-      description: "Description for ELANHOME",
-      domain: "home.elan.com",
-      href: "https://home.elan.com",
-      logoMono: "Placeholder for logoMono",
-      logoColor: "Placeholder for logoColor"
-    }
-  ];
-
   return (
-    <section className="projects">
-
+    <section className="projects" id="ecosistema">
       <div className="section-title">
-        <span>NUESTRAS HISTORIAS</span>
+        <span>ECOSISTEMA ELANKAV</span>
 
         <h2>
-          Proyectos que cuentan
-          lo que hacemos.
+          Unidades que convierten
+          <br />
+          ideas en soluciones.
         </h2>
       </div>
 
-      <div className="projects-grid">
-        {platforms.map((platform, index) => (
-          <a key={index} href={platform.href} target="_blank" rel="noreferrer" className="platform-card">
-            <div className="platform-logo">
-              <div className="platform-logo-mono">{platform.logoMono}</div>
-              <div className="platform-logo-color">{platform.logoColor}</div>
+      <div className="projects-grid projects-grid-active">
+        {ecosystemPlatforms.map((platform, index) => (
+          <a
+            key={platform.id}
+            href={platform.href}
+            target="_blank"
+            rel="noreferrer"
+            className="platform-card platform-card-link platform-card-live"
+            aria-label={`Visitar ${platform.name}`}
+          >
+            <div className="platform-preview" aria-hidden="true">
+              <iframe
+                src={platform.previewUrl}
+                title={`Vista previa de ${platform.name}`}
+                loading="lazy"
+                tabIndex="-1"
+              />
             </div>
-            <h3>{platform.name}</h3>
-            <p>{platform.description}</p>
-            <span className="platform-domain">{platform.domain}</span>
+
+            <div className="platform-card-shade" aria-hidden="true" />
+
+            <div className="platform-card-topline">
+              <span className="platform-index">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <span className="platform-card-access">
+                <span className="platform-status">UNIDAD ACTIVA</span>
+                <span className="platform-arrow" aria-hidden="true">↗</span>
+              </span>
+            </div>
           </a>
         ))}
       </div>
-
     </section>
-  );
+  )
 }

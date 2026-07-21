@@ -4,7 +4,6 @@ import Header from "./components/Header"
 import Hero from "./components/Hero"
 import Essence from "./components/Essence"
 import Projects from "./components/Projects"
-import Units from "./components/Units"
 import Footer from "./components/Footer"
 
 export default function App() {
@@ -14,7 +13,6 @@ export default function App() {
       <Hero />
       <Essence />
       <Projects />
-      <Units />
       <Footer />
     </>
   )
