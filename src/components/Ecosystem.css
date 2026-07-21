@@ -34,16 +34,14 @@
 }
 
 .platform-preview iframe {
-  width: 180%;
-  height: 180%;
+  width: 320%;
+  height: 320%;
   border: 0;
   pointer-events: none;
-  transform: scale(0.56);
+  transform: scale(0.3125);
   transform-origin: top left;
   filter: grayscale(1) contrast(0.94) brightness(0.82);
-  transition:
-    filter 520ms ease,
-    transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1);
+  transition: filter 520ms ease;
 }
 
 .platform-card-shade {
@@ -67,7 +65,6 @@
 .projects-grid .platform-card-link:hover .platform-preview iframe,
 .projects-grid .platform-card-link:focus-visible .platform-preview iframe {
   filter: grayscale(0) contrast(1) brightness(0.98);
-  transform: scale(0.575);
 }
 
 .projects-grid .platform-card-link:hover .platform-card-shade,
@@ -162,14 +159,9 @@
   }
 
   .platform-preview iframe {
-    width: 220%;
-    height: 220%;
-    transform: scale(0.455);
-  }
-
-  .projects-grid .platform-card-link:hover .platform-preview iframe,
-  .projects-grid .platform-card-link:focus-visible .platform-preview iframe {
-    transform: scale(0.468);
+    width: 260%;
+    height: 260%;
+    transform: scale(0.384615);
   }
 
   .platform-card-topline {
@@ -190,7 +182,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .projects-grid .platform-card,
-  .platform-preview iframe,
   .platform-card-shade,
   .platform-arrow {
     transition: none;
