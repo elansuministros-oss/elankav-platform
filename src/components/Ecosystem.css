@@ -1,59 +1,136 @@
+.projects-grid-active {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .projects-grid .platform-card {
-  min-height: 390px;
+  min-height: 440px;
   padding: 28px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   background: #111;
   color: #fff;
   transition:
-    transform 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease;
+    transform 420ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    border-color 420ms ease,
+    box-shadow 420ms ease;
+}
+
+.platform-preview,
+.platform-card-shade {
+  position: absolute;
+  inset: 0;
+}
+
+.platform-preview {
+  z-index: -3;
+  overflow: hidden;
+  background: #111;
+}
+
+.platform-preview iframe {
+  width: 200%;
+  height: 200%;
+  border: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+  transform-origin: top left;
+  filter: grayscale(1) contrast(0.92) brightness(0.72);
+  transition:
+    filter 520ms ease,
+    transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.platform-card-shade {
+  z-index: -2;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, 0.08) 10%, rgba(5, 5, 5, 0.32) 48%, rgba(5, 5, 5, 0.96) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.25), transparent 55%);
+  transition: opacity 420ms ease;
 }
 
 .projects-grid .platform-card-link:hover,
 .projects-grid .platform-card-link:focus-visible {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.34);
-  background: #080808;
+  transform: translateY(-7px);
+  border-color: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.24);
+}
+
+.projects-grid .platform-card-link:hover .platform-preview iframe,
+.projects-grid .platform-card-link:focus-visible .platform-preview iframe {
+  filter: grayscale(0) contrast(1) brightness(0.92);
+  transform: scale(0.515);
+}
+
+.projects-grid .platform-card-link:hover .platform-card-shade,
+.projects-grid .platform-card-link:focus-visible .platform-card-shade {
+  opacity: 0.86;
+}
+
+.platform-card-topline,
+.platform-card-content {
+  position: relative;
+  z-index: 1;
 }
 
 .platform-card-topline {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.88);
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.16em;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.75);
 }
 
 .platform-card-content {
   margin-top: auto;
+  max-width: 620px;
 }
 
 .projects-grid .platform-card h3 {
-  margin-bottom: 18px;
+  margin-bottom: 12px;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 0.95;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.78);
 }
 
 .projects-grid .platform-card p {
-  max-width: 420px;
-  color: #c9c9c9;
-  font-size: 16px;
-  line-height: 1.55;
+  max-width: 470px;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 15px;
+  line-height: 1.5;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.78);
 }
 
 .projects-grid .platform-domain {
-  display: inline-block;
-  margin-top: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
   padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   color: #fff;
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.14em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.78);
+}
+
+.platform-arrow {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 260ms ease;
+}
+
+.platform-card-link:hover .platform-arrow,
+.platform-card-link:focus-visible .platform-arrow {
+  transform: translate(3px, -3px);
 }
 
 .units-list a,
@@ -93,9 +170,27 @@
   letter-spacing: 0.14em;
 }
 
+@media (max-width: 900px) {
+  .projects-grid-active {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 680px) {
   .projects-grid .platform-card {
-    min-height: 330px;
+    min-height: 390px;
+    padding: 22px;
+  }
+
+  .platform-preview iframe {
+    width: 260%;
+    height: 260%;
+    transform: scale(0.385);
+  }
+
+  .projects-grid .platform-card-link:hover .platform-preview iframe,
+  .projects-grid .platform-card-link:focus-visible .platform-preview iframe {
+    transform: scale(0.395);
   }
 
   .units-list a,
@@ -103,5 +198,14 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-grid .platform-card,
+  .platform-preview iframe,
+  .platform-card-shade,
+  .platform-arrow {
+    transition: none;
   }
 }
