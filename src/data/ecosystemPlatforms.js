@@ -17,4 +17,13 @@ export const ecosystemPlatforms = [
     previewUrl: "https://pet.elankav.com",
     status: "active",
   },
+  {
+    id: "elanhome",
+    name: "ELANHOME",
+    description: "Marketplace para hogar, construcción, decoración, mobiliario y soluciones para cada espacio.",
+    domain: "home.elankav.com",
+    href: "https://home.elankav.com",
+    previewUrl: "https://home.elankav.com",
+    status: "active",
+  },
 ]
