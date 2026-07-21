@@ -39,14 +39,9 @@ export default function Projects() {
               <span className="platform-index">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="platform-status">UNIDAD ACTIVA</span>
-            </div>
 
-            <div className="platform-card-content">
-              <h3>{platform.name}</h3>
-              <p>{platform.description}</p>
-              <span className="platform-domain">
-                {platform.domain}
+              <span className="platform-card-access">
+                <span className="platform-status">UNIDAD ACTIVA</span>
                 <span className="platform-arrow" aria-hidden="true">↗</span>
               </span>
             </div>
