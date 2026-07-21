@@ -2,10 +2,6 @@ import { ecosystemPlatforms } from "../data/ecosystemPlatforms"
 import "./Ecosystem.css"
 
 export default function Projects() {
-  const featuredPlatforms = ecosystemPlatforms.filter(
-    (platform) => platform.id !== "kavtore",
-  )
-
   return (
     <section className="projects" id="ecosistema">
       <div className="section-title">
@@ -18,50 +14,44 @@ export default function Projects() {
         </h2>
       </div>
 
-      <div className="projects-grid">
-        {featuredPlatforms.map((platform, index) => {
-          const content = (
-            <>
-              <div className="platform-card-topline">
-                <span className="platform-index">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="platform-status">
-                  {platform.status === "active" ? "UNIDAD ACTIVA" : "ECOSISTEMA"}
-                </span>
-              </div>
+      <div className="projects-grid projects-grid-active">
+        {ecosystemPlatforms.map((platform, index) => (
+          <a
+            key={platform.id}
+            href={platform.href}
+            target="_blank"
+            rel="noreferrer"
+            className="platform-card platform-card-link platform-card-live"
+            aria-label={`Visitar ${platform.name}`}
+          >
+            <div className="platform-preview" aria-hidden="true">
+              <iframe
+                src={platform.previewUrl}
+                title={`Vista previa de ${platform.name}`}
+                loading="lazy"
+                tabIndex="-1"
+              />
+            </div>
 
-              <div className="platform-card-content">
-                <h3>{platform.name}</h3>
-                <p>{platform.description}</p>
-                <span className="platform-domain">
-                  {platform.domain || "ELANKAV.COM"}
-                </span>
-              </div>
-            </>
-          )
+            <div className="platform-card-shade" aria-hidden="true" />
 
-          if (!platform.href) {
-            return (
-              <article key={platform.id} className="platform-card platform-card-static">
-                {content}
-              </article>
-            )
-          }
+            <div className="platform-card-topline">
+              <span className="platform-index">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="platform-status">UNIDAD ACTIVA</span>
+            </div>
 
-          return (
-            <a
-              key={platform.id}
-              href={platform.href}
-              target="_blank"
-              rel="noreferrer"
-              className="platform-card platform-card-link"
-              aria-label={`Visitar ${platform.name}`}
-            >
-              {content}
-            </a>
-          )
-        })}
+            <div className="platform-card-content">
+              <h3>{platform.name}</h3>
+              <p>{platform.description}</p>
+              <span className="platform-domain">
+                {platform.domain}
+                <span className="platform-arrow" aria-hidden="true">↗</span>
+              </span>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
   )
