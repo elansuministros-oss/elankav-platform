@@ -26,4 +26,13 @@ export const ecosystemPlatforms = [
     previewUrl: "https://home.elankav.com",
     status: "active",
   },
+  {
+    id: "elannicaragua",
+    name: "ELAN NICARAGUA",
+    description: "Viajes privados, hospedaje, transporte, experiencias, negocios y soporte local para descubrir Nicaragua.",
+    domain: "nicaragua.elankav.com",
+    href: "https://nicaragua.elankav.com",
+    previewUrl: "https://nicaragua.elankav.com",
+    status: "active",
+  },
 ]
