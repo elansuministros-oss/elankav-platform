@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import './PublicReceipt.css'
 
 const CONNECT_BASE_URL = 'https://connect.elankav.com'
+const ELANKAV_WEB = 'https://elankav.com'
+const ELANKAV_PHONE_DISPLAY = '+505 7882 8089'
+const ELANKAV_PHONE_LINK = 'tel:+50578828089'
 
 function money(value) {
   return new Intl.NumberFormat('es-NI', { style: 'currency', currency: 'USD' }).format(Number(value || 0))
@@ -15,10 +18,10 @@ function paymentTypeLabel(value) {
 }
 
 function paymentMethodLabel(value) {
-  if (value === 'bank_transfer') return 'Transferencia bancaria'
+  if (value === 'bank_transfer' || value === 'transfer') return 'Transferencia bancaria'
   if (value === 'cash') return 'Efectivo'
   if (value === 'card') return 'Tarjeta'
-  if (value === 'cheque') return 'Cheque'
+  if (value === 'cheque' || value === 'other') return 'Cheque / Otro'
   return value || 'No especificado'
 }
 
@@ -57,7 +60,7 @@ export default function PublicReceipt({ receiptNumber }) {
   if (loading) return <main className="public-receipt-shell"><div className="receipt-status">Cargando recibo…</div></main>
   if (error || !receipt) return <main className="public-receipt-shell"><div className="receipt-status receipt-error"><strong>Recibo no disponible</strong><span>{error || 'No encontramos este recibo.'}</span></div></main>
 
-  const isPaid = Number(receipt.pendingBalanceUsd || 0) <= 0.009
+  const isPaid = Number(receipt.pendingBalanceUsd || 0) <= 0.009 && Number(receipt.quotationTotalUsd || 0) > 0
 
   return (
     <main className="public-receipt-shell">
@@ -108,12 +111,17 @@ export default function PublicReceipt({ receiptNumber }) {
         <footer className="receipt-footer">
           <strong>ELANKAV</strong>
           <span>Documento oficial de recepción de pago</span>
+          <div className="receipt-contact">
+            <a href={ELANKAV_WEB}>elankav.com</a>
+            <span>•</span>
+            <a href={ELANKAV_PHONE_LINK}>{ELANKAV_PHONE_DISPLAY}</a>
+          </div>
         </footer>
       </section>
 
       <div className="receipt-actions">
         <button type="button" onClick={() => window.print()}>Descargar PDF</button>
-        <a href="https://elankav.com">Ir a ELANKAV</a>
+        <a href={ELANKAV_WEB}>Ir a ELANKAV</a>
       </div>
     </main>
   )
