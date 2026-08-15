@@ -14,6 +14,19 @@ function paymentTypeLabel(value) {
   return 'Pago'
 }
 
+function paymentMethodLabel(value) {
+  if (value === 'bank_transfer') return 'Transferencia bancaria'
+  if (value === 'cash') return 'Efectivo'
+  if (value === 'card') return 'Tarjeta'
+  if (value === 'cheque') return 'Cheque'
+  return value || 'No especificado'
+}
+
+function Row({ label, value, strong = false }) {
+  if (value === undefined || value === null || value === '') return null
+  return <div><span>{label}</span><strong className={strong ? 'receipt-amount' : ''}>{value}</strong></div>
+}
+
 export default function PublicReceipt({ receiptNumber }) {
   const [receipt, setReceipt] = useState(null)
   const [error, setError] = useState('')
@@ -44,6 +57,8 @@ export default function PublicReceipt({ receiptNumber }) {
   if (loading) return <main className="public-receipt-shell"><div className="receipt-status">Cargando recibo…</div></main>
   if (error || !receipt) return <main className="public-receipt-shell"><div className="receipt-status receipt-error"><strong>Recibo no disponible</strong><span>{error || 'No encontramos este recibo.'}</span></div></main>
 
+  const isPaid = Number(receipt.pendingBalanceUsd || 0) <= 0.009
+
   return (
     <main className="public-receipt-shell">
       <section className="public-receipt-card" id="receipt-print-area">
@@ -59,14 +74,35 @@ export default function PublicReceipt({ receiptNumber }) {
             <strong>{receipt.projectName || 'Proyecto ELANKAV'}</strong>
           </div>
 
+          <h2 className="receipt-section-title">Datos del documento</h2>
           <div className="receipt-grid">
-            <div><span>Tipo de pago</span><strong>{paymentTypeLabel(receipt.paymentType)}</strong></div>
-            {receipt.quotationNumber ? <div><span>Cotización</span><strong>{receipt.quotationNumber}</strong></div> : null}
-            <div><span>Fecha de pago</span><strong>{new Date(receipt.paidAt).toLocaleString('es-NI')}</strong></div>
-            <div><span>Monto recibido</span><strong className="receipt-amount">{money(receipt.amountUsd)}</strong></div>
+            <Row label="Tipo de pago" value={paymentTypeLabel(receipt.paymentType)} />
+            <Row label="Cotización" value={receipt.quotationNumber} />
+            <Row label="Fecha de pago" value={new Date(receipt.paidAt).toLocaleString('es-NI')} />
+            <Row label="Cliente" value={receipt.customerName} />
+            <Row label="Empresa" value={receipt.companyName} />
+            <Row label="Ejecutivo" value={receipt.executiveName} />
           </div>
 
-          <div className="receipt-paid">PAGO REGISTRADO</div>
+          <h2 className="receipt-section-title">Detalle del pago</h2>
+          <div className="receipt-grid">
+            <Row label="Forma de pago" value={paymentMethodLabel(receipt.paymentMethod)} />
+            <Row label="Banco" value={receipt.bankName} />
+            <Row label="Monto recibido" value={money(receipt.amountUsd)} strong />
+          </div>
+
+          <h2 className="receipt-section-title">Resumen financiero</h2>
+          <div className="receipt-grid receipt-financial">
+            <Row label="Total de la cotización" value={money(receipt.quotationTotalUsd)} />
+            <Row label="Total pagado" value={money(receipt.totalPaidUsd)} />
+            <Row label="Saldo pendiente" value={money(receipt.pendingBalanceUsd)} strong />
+          </div>
+
+          {receipt.notes ? <div className="receipt-notes"><small>OBSERVACIONES</small><p>{receipt.notes}</p></div> : null}
+
+          <div className={`receipt-paid ${isPaid ? 'is-paid' : ''}`}>
+            {isPaid ? 'PAGADO' : 'PAGO REGISTRADO'}
+          </div>
         </div>
 
         <footer className="receipt-footer">
