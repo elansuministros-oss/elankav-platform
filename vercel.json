@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/ELK-REC-:path*", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
