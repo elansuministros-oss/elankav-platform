@@ -12,6 +12,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 8
+    env:
+      NPM_CONFIG_CACHE: /tmp/elan-go-npm-cache
 
     steps:
       - uses: actions/checkout@v4
