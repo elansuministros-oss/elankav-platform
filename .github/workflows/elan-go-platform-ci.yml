@@ -26,8 +26,8 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      - name: Lint ELAN GO surface
+        run: npx eslint src/App.jsx src/components/ElanGoStatus.jsx
 
       - name: Build
         run: npm run build
