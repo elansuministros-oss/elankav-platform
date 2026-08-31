@@ -70,8 +70,32 @@ button {
   letter-spacing: 0.14em;
 }
 
-.header-link {
+.header-actions {
   justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.header-link,
+.header-go-link {
+  background: none;
+  border: 0;
+  color: #080808;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.header-go-link {
+  padding: 8px 11px;
+  border: 1px solid #080808;
+}
+
+.header-go-link:hover,
+.header-go-link:focus-visible {
+  background: #080808;
+  color: #ffffff;
 }
 
 /* HERO */
@@ -275,6 +299,15 @@ button {
 
   .header-link {
     display: none;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .header-go-link {
+    font-size: 10px;
+    padding: 7px 8px;
   }
 
   .logo {
