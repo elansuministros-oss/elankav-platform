@@ -9,9 +9,20 @@ export default function Header() {
         ELANKAV.
       </div>
 
-      <a href="#historia" className="header-link">
-        CONOCE ELANKAV →
-      </a>
+      <div className="header-actions">
+        <a
+          href="https://go.elankav.com"
+          target="_blank"
+          rel="noreferrer"
+          className="header-go-link"
+        >
+          ELAN GO ↗
+        </a>
+
+        <a href="#historia" className="header-link">
+          CONOCE ELANKAV →
+        </a>
+      </div>
     </header>
   )
 }
