@@ -1,5 +1,14 @@
 export const ecosystemPlatforms = [
   {
+    id: "elango",
+    name: "ELAN GO",
+    description: "Broker comercial autónomo que busca ofertas y compradores, negocia oportunidades y conecta ambas partes.",
+    domain: "go.elankav.com",
+    href: "https://go.elankav.com",
+    previewUrl: "https://go.elankav.com",
+    status: "active",
+  },
+  {
     id: "elanvisual",
     name: "ELANVISUAL",
     description: "Soluciones visuales, rotulación, fabricación y producción gráfica para marcas y espacios.",
